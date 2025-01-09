@@ -100,14 +100,30 @@ class Plugin {
         echo '</div>';
     }
 
-    public function render_teams() {
-        echo '<div class="wrap">';
-        echo '<h1>Teams Management</h1>';
-        $team_list = new \EBM\Admin\TeamList();
-        $team_list->prepare_items();
-        $team_list->display();
-        echo '</div>';
-    }
+public function render_teams() {
+    echo '<div class="wrap">';
+    echo '<h1 class="wp-heading-inline">Teams Management</h1>';
+    echo '<a href="?page=basketball-manager-teams&action=add" class="page-title-action">Add New Team</a>';
+    
+    // Add filter by team type
+    echo '<div class="tablenav top">';
+    echo '<div class="alignleft actions">';
+    echo '<select name="team_type">';
+    echo '<option value="">All Team Types</option>';
+    echo '<option value="club">Club</option>';
+    echo '<option value="school">School</option>';
+    echo '<option value="league">League</option>';
+    echo '</select>';
+    echo '<input type="submit" class="button" value="Filter">';
+    echo '</div>';
+    echo '</div>';
+
+    // Display team list
+    $team_list = new \EBM\Admin\TeamList();
+    $team_list->prepare_items();
+    $team_list->display();
+    echo '</div>';
+}
 
     public function render_players() {
         echo '<div class="wrap">';
