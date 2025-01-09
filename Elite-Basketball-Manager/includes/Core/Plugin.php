@@ -11,9 +11,14 @@ class Plugin {
         return self::$instance;
     }
 
-    private function __construct() {
-        $this->load_dependencies();
+   private function __construct() {
+    $this->load_dependencies();
+    
+    if (is_admin()) {
+        $team_handler = new \EBM\Admin\TeamFormHandler();
+        add_action('admin_init', [$team_handler, 'handle_form_submission']);
     }
+}
 
     private function load_dependencies() {
         if (is_admin()) {
